@@ -36,4 +36,18 @@ public class geneticAlgorithm {
         
         
     }
+    
+    public void mutation(){
+        double nilaiRandom = Math.random();
+        int indexRandom1 = (int)nilaiRandom * this.Childsatu.length-1;
+        int indexRandom2 = (int)nilaiRandom * this.Childdua.length-1;
+        
+        int temp = this.Childsatu[indexRandom1];
+        this.Childsatu[indexRandom1] = this.Childsatu[indexRandom2];
+        this.Childsatu[indexRandom2] = temp;
+        
+        int temp2 = this.Childdua[indexRandom1];
+        this.Childdua[indexRandom1] = this.Childdua[indexRandom2];
+        this.Childdua[indexRandom2] = temp;
+    }
 }
