@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,33 +13,40 @@ import java.util.ArrayList;
  *
  * @author user
  */
-public class KumpulanKota {
-    private ArrayList<Kota> kumpulanK;
+public class Rute {
+    private ArrayList<Kota> Rute;
     private double [][] jarak;
     private int jumlahKota;
-    private int fitnes;
-    private int cost;
+    private double fitnes;
+    private boolean isFitnessChange;
+    private double cost;
     
-    public KumpulanKota(){
-        kumpulanK = new ArrayList<>();
-        this.cost = 0;
+    public Rute(ArrayList<Kota> list){
+        this.Rute = new ArrayList<>();
+        this.Rute.addAll(list);
+        Collections.shuffle(this.Rute);
         this.fitnes = 0;
+        this.isFitnessChange = true;
+    }
+
+    public ArrayList<Kota> getRute() {
+        if(isFitnessChange){
+            this.fitnes = this.getFitnes();
+            isFitnessChange=false;
+        }
+        return Rute;
+    }
+
+    public int getJumlahKota() {
+        return jumlahKota;
     }
     
     public void addKota(Kota kotaBaru){
-        this.kumpulanK.add(kotaBaru);
-    }
-    
-    public void banyakKota(){
-        this.jumlahKota = this.kumpulanK.size();
-        this.jarak = new double[this.jumlahKota+1][this.jumlahKota+1]; 
-    }
-    
-    public Kota getKota(int i){
-        return this.kumpulanK.get(i);
+        this.Rute.add(kotaBaru);
     }
     
     public void hitungJarakTiapKota(){
+        this.jumlahKota = this.Rute.size();
         for(int i=0; i<this.jumlahKota; i++){
             for(int j=0; j<this.jumlahKota; j++){
                 if(i==j){
@@ -54,8 +63,12 @@ public class KumpulanKota {
         }
     }
     
-    public int getFitnes(){
+    public double getFitnes(){
         this.fitnes = 1/this.cost;
         return this.fitnes;
+    }
+    
+    public Kota getKota(int i){
+        return this.Rute.get(i);
     }
 }

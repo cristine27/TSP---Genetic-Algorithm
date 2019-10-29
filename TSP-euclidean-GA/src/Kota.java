@@ -11,10 +11,12 @@
 public class Kota {
     int x;
     int y;
+    int angka;
     
-    public Kota(int x,int y){
+    public Kota(int angka,int x,int y){
         this.x = x;
         this.y = y;
+        this.angka = angka;
     }
 
     public int getX() {
@@ -25,12 +27,20 @@ public class Kota {
         return y;
     }
 
+    public int getAngka() {
+        return angka;
+    }
+    
     public void setX(int x) {
         this.x = x;
     }
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setAngka(int angka) {
+        this.angka = angka;
     }
     
     public double distanceToOther(Kota kotaLain){
