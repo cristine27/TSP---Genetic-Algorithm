@@ -14,61 +14,61 @@ import java.util.Collections;
  * @author user
  */
 public class Rute {
-    private ArrayList<Kota> Rute;
-    private double [][] jarak;
+    private ArrayList<Kota> KumpulanKota;
+    private double fitness;
     private int jumlahKota;
-    private double fitnes;
-    private boolean isFitnessChange;
-    private double cost;
+    private double jarakTotal;
+    private double peluang;
+    private double kumulatifPeluang;
     
-    public Rute(ArrayList<Kota> list){
-        this.Rute = new ArrayList<>();
-        this.Rute.addAll(list);
-        Collections.shuffle(this.Rute);
-        this.fitnes = 0;
-        this.isFitnessChange = true;
-    }
-
-    public ArrayList<Kota> getRute() {
-        if(isFitnessChange){
-            this.fitnes = this.getFitnes();
-            isFitnessChange=false;
-        }
-        return Rute;
-    }
-
-    public int getJumlahKota() {
-        return jumlahKota;
+    public Rute(ArrayList<Kota> KK){
+        this.KumpulanKota = KK;
+        this.jumlahKota = KK.size();
     }
     
-    public void addKota(Kota kotaBaru){
-        this.Rute.add(kotaBaru);
-    }
-    
-    public void hitungJarakTiapKota(){
-        this.jumlahKota = this.Rute.size();
-        for(int i=0; i<this.jumlahKota; i++){
-            for(int j=0; j<this.jumlahKota; j++){
-                if(i==j){
-                    continue;
-                }
-                else{
-                    double x = this.getKota(i).getX()-this.getKota(j).getX();
-                    double y = this.getKota(i).getY()-this.getKota(j).getY();
-                    this.jarak[i][j] = Math.sqrt((x*x)+(y*y));
-                    this.jarak[j][i] = Math.sqrt((x*x)+(y*y));
-                    this.cost += this.jarak[i][j]; 
-                }
-            }
-        }
-    }
-    
-    public double getFitnes(){
-        this.fitnes = 1/this.cost;
-        return this.fitnes;
+    public int getJumlahKota(){
+        return this.jumlahKota;
     }
     
     public Kota getKota(int i){
-        return this.Rute.get(i);
+        return this.KumpulanKota.get(i-1);
+    }
+    
+    public double getFitness(){
+        this.fitness = 1/this.jarakTotal;
+        return this.fitness;
+    }
+    
+    public ArrayList<Kota> getRute(){
+        return this.KumpulanKota;
+    }
+    
+    public void hitungJarakTotal(double[][] jarakTiapKota){
+        this.jarakTotal = 0;
+        for(int i=1; i<this.jumlahKota; i++){
+            this.jarakTotal+=jarakTiapKota[this.getKota(i).getAngka()][this.getKota(i+1).angka];
+        }
+    }
+    
+    public ArrayList<Kota> acakRute(double[][]jarakTiapKota){
+        Collections.shuffle(KumpulanKota);
+        this.hitungJarakTotal(jarakTiapKota);
+        return this.KumpulanKota;
+    }
+
+    public double getPeluang() {
+        return peluang;
+    }
+
+    public double getKumulatifPeluang() {
+        return kumulatifPeluang;
+    }
+
+    public void setPeluang(double peluang) {
+        this.peluang = peluang;
+    }
+
+    public void setKumulatifPeluang(double kumulatifPeluang) {
+        this.kumulatifPeluang = kumulatifPeluang;
     }
 }
