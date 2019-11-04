@@ -15,9 +15,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int populationSize = 101;
+        int populationSize = 10;
         ArrayList<Kota> kumpulanKota = new ArrayList<>();
         while(sc.hasNextInt()){
+            if(sc.nextInt()==-1){
+                break;
+            }
             Kota kota = new Kota(sc.nextInt(),sc.nextInt(),sc.nextInt()); 
             kumpulanKota.add(kota);
         }
@@ -25,7 +28,7 @@ public class Main {
         double[][] jarakTiapKota = new double[jumlahKota+1][jumlahKota+1];
         for(int i=0; i<jarakTiapKota.length-1; i++){
             for(int j=0; j<jarakTiapKota.length-1; j++){
-                if(i==j){
+                if(kumpulanKota.get(i).getAngka()==kumpulanKota.get(j).getAngka()){
                     jarakTiapKota[kumpulanKota.get(i).getAngka()][kumpulanKota.get(j).getAngka()]=0;
                 }
                 else{
@@ -41,8 +44,11 @@ public class Main {
         KumpulanRute populasi = new KumpulanRute(populationSize);
         double totalFitness = 0;
         for(int i=0; i<populationSize; i++){
-            Rute rute = new Rute(kumpulanKota);
-            rute.hitungJarakTotal(jarakTiapKota);
+            RuteMethod tempRute = new RuteMethod(kumpulanKota, jarakTiapKota);
+            tempRute.acakRute();
+            double jarak = tempRute.getJarak();
+            ArrayList<Kota> tempList = (ArrayList<Kota>)tempRute.getKumpulanKota().clone();
+            Rute rute = new Rute(tempList,jarak);
             populasi.tambahRute(i, rute);
             totalFitness+=rute.getFitness();
         }

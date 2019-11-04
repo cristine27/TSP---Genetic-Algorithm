@@ -38,8 +38,6 @@ public class KumpulanRute {
             double peluang = this.populasi[i].getFitness()/this.totalFitnessFunction;
             this.populasi[i].setPeluang(peluang);
             total+=peluang;
-            this.populasi[i].setKumulatifPeluang(peluang);
-            
             this.range[i][0]=peluang;
             this.range[i][1]=total;
         }   
@@ -61,7 +59,5 @@ public class KumpulanRute {
 
     public void setTotalFitnessFunction(double totalFitnessFunction) {
         this.totalFitnessFunction = totalFitnessFunction;
-    }
-    
-    
+    }    
 }

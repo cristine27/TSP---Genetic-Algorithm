@@ -19,11 +19,12 @@ public class Rute {
     private int jumlahKota;
     private double jarakTotal;
     private double peluang;
-    private double kumulatifPeluang;
+//    private double kumulatifPeluang;
     
-    public Rute(ArrayList<Kota> KK){
+    public Rute(ArrayList<Kota> KK,double jarak){
         this.KumpulanKota = KK;
         this.jumlahKota = KK.size();
+        this.jarakTotal = jarak;
     }
     
     public int getJumlahKota(){
@@ -34,41 +35,28 @@ public class Rute {
         return this.KumpulanKota.get(i-1);
     }
     
+    public ArrayList<Kota> getRute(){
+        return this.KumpulanKota;
+    }
+    
     public double getFitness(){
         this.fitness = 1/this.jarakTotal;
         return this.fitness;
     }
     
-    public ArrayList<Kota> getRute(){
-        return this.KumpulanKota;
-    }
-    
-    public void hitungJarakTotal(double[][] jarakTiapKota){
-        this.jarakTotal = 0;
-        for(int i=1; i<this.jumlahKota; i++){
-            this.jarakTotal+=jarakTiapKota[this.getKota(i).getAngka()][this.getKota(i+1).angka];
-        }
-    }
-    
-    public ArrayList<Kota> acakRute(double[][]jarakTiapKota){
-        Collections.shuffle(KumpulanKota);
-        this.hitungJarakTotal(jarakTiapKota);
-        return this.KumpulanKota;
-    }
-
     public double getPeluang() {
         return peluang;
     }
-
-    public double getKumulatifPeluang() {
-        return kumulatifPeluang;
-    }
-
+    
     public void setPeluang(double peluang) {
         this.peluang = peluang;
     }
 
-    public void setKumulatifPeluang(double kumulatifPeluang) {
-        this.kumulatifPeluang = kumulatifPeluang;
-    }
+//    public double getKumulatifPeluang() {
+//        return kumulatifPeluang;
+//    }
+
+//    public void setKumulatifPeluang(double kumulatifPeluang) {
+//        this.kumulatifPeluang = kumulatifPeluang;
+//    }
 }
