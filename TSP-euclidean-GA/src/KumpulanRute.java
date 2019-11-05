@@ -50,8 +50,11 @@ public class KumpulanRute {
                 for (int j = 1; j < populasi[i].getJumlahKota(); j++) {
                     System.out.print(this.populasi[i].getRute().get(j-1).getAngka()+" ");   
                 }
+                System.out.println("");
                 System.out.print("Peluang :"+this.range[i][0]);
+                System.out.println("");
                 System.out.print("Cumulative :"+this.range[i][1]);
+                System.out.println("");
                 System.out.print("Fitness :"+this.populasi[i].getFitness());
             }
         }

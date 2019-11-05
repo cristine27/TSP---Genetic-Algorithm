@@ -13,7 +13,7 @@ import java.util.Collections;
  * @author user
  */
 public class RuteMethod {
-    private int jarak;
+    private double jarak;
     private double [][] jarakTiapKota;
     private ArrayList<Kota> kumpulanKota;
     private int totalKota;
@@ -21,13 +21,18 @@ public class RuteMethod {
     public RuteMethod(ArrayList<Kota> list, double [][] map){
         this.jarak = 0;
         this.jarakTiapKota = map;
+//        System.out.println(map[kumpulanKota.get()][]); 
         this.kumpulanKota = list;
         this.totalKota = list.size();
+        System.out.println("jumlah kota: " + this.totalKota);
     }
     
     public void hitungJarakTotal(){
-        for(int i=0; i<this.totalKota; i++){
-            this.jarak+=jarakTiapKota[kumpulanKota.get(i).getAngka()][kumpulanKota.get(i+1).angka];
+        for(int i=1; i<this.totalKota; i++){
+            int x = this.get(i).getAngka();
+            int y = this.get(i+1).getAngka();
+            this.jarak+=jarakTiapKota[x][y];
+            System.out.println(this.jarak);
         }
     }
     
@@ -41,7 +46,11 @@ public class RuteMethod {
         return kumpulanKota;
     }
 
-    public int getJarak() {
+    public double getJarak() {
         return jarak;
+    }
+    
+    public Kota get(int i){
+        return this.kumpulanKota.get(i-1);
     }
 }

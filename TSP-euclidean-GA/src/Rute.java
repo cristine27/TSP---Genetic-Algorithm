@@ -51,12 +51,4 @@ public class Rute {
     public void setPeluang(double peluang) {
         this.peluang = peluang;
     }
-
-//    public double getKumulatifPeluang() {
-//        return kumulatifPeluang;
-//    }
-
-//    public void setKumulatifPeluang(double kumulatifPeluang) {
-//        this.kumulatifPeluang = kumulatifPeluang;
-//    }
 }

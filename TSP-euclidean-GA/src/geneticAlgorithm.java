@@ -14,27 +14,27 @@ import java.util.Random;
 public class geneticAlgorithm {
     public int [] Childsatu;
     public int [] Childdua;
+    public Rute savedRute;
+    public static final boolean elitism = true;
     
     public geneticAlgorithm(int jlKota){
         this.Childsatu = new int[jlKota];
         this.Childdua = new int[jlKota];
     }
     
-    public void crossOver(int [] parent1, int [] parent2){
-        double nilaiRandom = Math.random();
-        int random =(int)nilaiRandom * parent1.length-1;
-        for(int i=0; i<parent1.length; i++){
-            if(i<random){
-                this.Childsatu[i] = parent1[i];
-                this.Childdua[this.Childdua.length-1-i] = parent1[this.Childsatu.length-1-i]; 
-            }
-            else{
-                this.Childdua[i] = parent2[i];
-                this.Childdua[this.Childdua.length-1-i] = parent2[this.Childdua.length-1-i];
-            }
+    public void saveRute(){
+        if(elitism){
+            //untuk menyimpan rute terbaik yang telah di temukan saat ini
         }
-        
-        
+    }
+    
+    public void crossOver(Rute parent1, Rute parent2){
+        double nilaiRandom = Math.random();
+        int random =(int)nilaiRandom * parent1.getJumlahKota();
+        System.out.println("ini nilai random "+random);
+        for(int i=random; i<parent1.getJumlahKota(); i++){
+            
+        }
     }
     
     public void mutation(){

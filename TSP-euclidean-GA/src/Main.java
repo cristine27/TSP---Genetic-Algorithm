@@ -18,10 +18,10 @@ public class Main {
         int populationSize = 10;
         ArrayList<Kota> kumpulanKota = new ArrayList<>();
         while(sc.hasNextInt()){
-            if(sc.nextInt()==-1){
-                break;
-            }
-            Kota kota = new Kota(sc.nextInt(),sc.nextInt(),sc.nextInt()); 
+            int angka = sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            Kota kota = new Kota(angka,x,y); 
             kumpulanKota.add(kota);
         }
         int jumlahKota = kumpulanKota.size();
@@ -35,8 +35,9 @@ public class Main {
                     int X = kumpulanKota.get(i).getX()-kumpulanKota.get(j).getX();
                     int Y = kumpulanKota.get(i).getY()-kumpulanKota.get(j).getY();
                     double dist = Math.sqrt((X*X)+(Y*Y));
-                    jarakTiapKota[kumpulanKota.get(i-1).getAngka()][kumpulanKota.get(j).getAngka()]=dist;
-                    jarakTiapKota[kumpulanKota.get(i-1).getAngka()][kumpulanKota.get(j).getAngka()]=dist;
+                    jarakTiapKota[kumpulanKota.get(i).getAngka()][kumpulanKota.get(j).getAngka()]=dist;
+                    jarakTiapKota[kumpulanKota.get(j).getAngka()][kumpulanKota.get(i).getAngka()]=dist;
+                    System.out.println(dist + " " + kumpulanKota.get(i).getAngka());
                 }
             }
         }
@@ -55,5 +56,8 @@ public class Main {
         populasi.setTotalFitnessFunction(totalFitness);
         populasi.hitungPeluang();
         populasi.printAllSolution();
+        
+        geneticAlgorithm ga = new geneticAlgorithm(jumlahKota);
+        ga.crossOver(null, null);
     }
 }
