@@ -21,10 +21,8 @@ public class RuteMethod {
     public RuteMethod(ArrayList<Kota> list, double [][] map){
         this.jarak = 0;
         this.jarakTiapKota = map;
-//        System.out.println(map[kumpulanKota.get()][]); 
         this.kumpulanKota = list;
         this.totalKota = list.size();
-        System.out.println("jumlah kota: " + this.totalKota);
     }
     
     public void hitungJarakTotal(){
@@ -32,7 +30,6 @@ public class RuteMethod {
             int x = this.get(i).getAngka();
             int y = this.get(i+1).getAngka();
             this.jarak+=jarakTiapKota[x][y];
-            System.out.println(this.jarak);
         }
     }
     

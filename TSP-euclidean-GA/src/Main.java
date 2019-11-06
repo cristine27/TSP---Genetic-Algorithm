@@ -56,6 +56,7 @@ public class Main {
         populasi.setTotalFitnessFunction(totalFitness);
         populasi.hitungPeluang();
         populasi.printAllSolution();
+        populasi.selection();
         
         geneticAlgorithm ga = new geneticAlgorithm(jumlahKota);
         ga.crossOver(null, null);

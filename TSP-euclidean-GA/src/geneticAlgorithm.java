@@ -31,7 +31,6 @@ public class geneticAlgorithm {
     public void crossOver(Rute parent1, Rute parent2){
         double nilaiRandom = Math.random();
         int random =(int)nilaiRandom * parent1.getJumlahKota();
-        System.out.println("ini nilai random "+random);
         for(int i=random; i<parent1.getJumlahKota(); i++){
             
         }
@@ -50,4 +49,6 @@ public class geneticAlgorithm {
         this.Childdua[indexRandom1] = this.Childdua[indexRandom2];
         this.Childdua[indexRandom2] = temp;
     }
+    
+    
 }

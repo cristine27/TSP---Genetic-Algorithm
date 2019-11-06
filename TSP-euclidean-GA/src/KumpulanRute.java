@@ -56,11 +56,21 @@ public class KumpulanRute {
                 System.out.print("Cumulative :"+this.range[i][1]);
                 System.out.println("");
                 System.out.print("Fitness :"+this.populasi[i].getFitness());
+                System.out.println("");
             }
         }
     }
 
     public void setTotalFitnessFunction(double totalFitnessFunction) {
         this.totalFitnessFunction = totalFitnessFunction;
-    }    
+    }
+    
+    public void selection(){
+        double angkaRandom = Math.random();
+        System.out.println("ukuran populasi "+this.ukuranPopulasi);
+        System.out.println("angka random "+angkaRandom);
+        double titikAmbil = angkaRandom * this.ukuranPopulasi;
+        System.out.println("titik ambil "+titikAmbil);
+        System.out.println(titikAmbil);
+    }
 }
