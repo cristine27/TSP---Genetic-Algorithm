@@ -56,9 +56,11 @@ public class Main {
         populasi.setTotalFitnessFunction(totalFitness);
         populasi.hitungPeluang();
         populasi.printAllSolution();
-        populasi.selection();
+        Rute parent1 = populasi.selection();
+        Rute parent2 = populasi.selection();
         
-        geneticAlgorithm ga = new geneticAlgorithm(jumlahKota);
-        ga.crossOver(null, null);
+        geneticAlgorithm ga = new geneticAlgorithm();
+        ga.crossOver(parent1,parent2);
+        
     }
 }

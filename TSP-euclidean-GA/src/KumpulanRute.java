@@ -65,12 +65,20 @@ public class KumpulanRute {
         this.totalFitnessFunction = totalFitnessFunction;
     }
     
-    public void selection(){
+    public Rute selection(){
         double angkaRandom = Math.random();
-        System.out.println("ukuran populasi "+this.ukuranPopulasi);
-        System.out.println("angka random "+angkaRandom);
-        double titikAmbil = angkaRandom * this.ukuranPopulasi;
-        System.out.println("titik ambil "+titikAmbil);
-        System.out.println(titikAmbil);
+//        System.out.println("ukuran populasi "+this.ukuranPopulasi);
+////        System.out.println("angka random "+angkaRandom);
+//        double temp = angkaRandom * this.ukuranPopulasi;
+//        System.out.println("titik ambil "+titikAmbil);
+//        System.out.println(titikAmbil);
+        int titikAmbil = 0;
+        for(int i=0; i<range.length; i++){
+            if(range[i][0]<=angkaRandom && angkaRandom<=range[i][1]){
+                titikAmbil = i;
+                break;
+            }
+        }
+        return this.ambilRute(titikAmbil);
     }
 }
