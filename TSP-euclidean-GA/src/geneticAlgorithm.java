@@ -45,16 +45,16 @@ public class geneticAlgorithm {
         for(int i=0; i<jumlahGenerasi; i++){
             Rute parent1 = selection(rute);
             Rute parent2 = selection(rute);
-            
+            System.out.println("jumlah kota parent "+parent1.getJumlahKota());
             Rute [] arr = new Rute[2];
             arr[0] = crossOver(parent1, parent2);
             arr[1] = crossOver(parent2, parent1);
-            
+            System.out.println("jumlah kota arr[0] "+ arr[0].getJumlahKota());
             double FlagMutasi = 0.5;
             double randomNum = Math.random();
-//            if(randomNum < FlagMutasi){
-//                mutation(arr[0],arr[1]);
-//            }
+            if(randomNum < FlagMutasi){
+                mutation(arr[0],arr[1]);
+            }
             
             newKRute.tambahRute(generasiKe++, arr[0]);
             newKRute.tambahRute(generasiKe++, arr[1]);
@@ -82,35 +82,50 @@ public class geneticAlgorithm {
     }
     
     public Rute crossOver(Rute parent1, Rute parent2){
+        Rute copyParent1 = parent1;
+        Rute copyParent2 = parent2;
         ArrayList<Kota> Childsatu = new ArrayList<>();
         ArrayList<Kota> Childdua = new ArrayList<>();
         
-        double nilaiRandom = Math.random();
-        double temp = nilaiRandom * parent1.getJumlahKota();
-        int random = (int)temp;
-        
-        ArrayList<Kota> tempAnak1 = new ArrayList<>();
-        for(int i=random; i<parent1.getJumlahKota(); i++){
-            if(i!=0 && i!=parent1.getJumlahKota()){
-                tempAnak1.add(parent1.getKota(i));
-            }
-        }
-        for(int i=1; i<=parent2.getJumlahKota(); i++){
-            for(int j=0; j<tempAnak1.size(); j++){
-                if(parent2.getKota(i)!=tempAnak1.get(j)){
-                    Childsatu.add(parent2.getKota(i));
+        Random rand = new Random();
+        int breakPoint = rand.nextInt(parent1.getJumlahKota());
+//        for(int i=1; i<parent1.getJumlahKota(); i++){
+//            System.out.println("ini parent 1 " + parent1.getKota(i).getAngka() );
+//        }
+        for(int i=1; i<=breakPoint; i++){
+            Kota angka = copyParent2.getKota(i);
+            for(int j=1; j<=copyParent1.getJumlahKota(); j++){
+                if(copyParent1.getKota(j)==angka){
+                    Kota temp = copyParent1.getKota(i);
+                    copyParent1.setKota(i, copyParent1.getKota(j));
+                    copyParent1.setKota(j, temp);
                 }
             }
         }
-        Collections.shuffle(tempAnak1);
-        for(int i=0; i<tempAnak1.size(); i++){
-            Childsatu.add(tempAnak1.get(i));
-        }
         
+//        ArrayList<Kota> tempAnak1 = new ArrayList<>();
+//        for(int i=random; i<parent1.getJumlahKota(); i++){
+//            if(i!=0 && i!=parent1.getJumlahKota()){
+//                tempAnak1.add(parent1.getKota(i));
+//            }
+//        }
+//        System.out.println("ukuran temp1 "+ tempAnak1.size());
+//        for(int i=1; i<=parent2.getJumlahKota(); i++){
+//            for(int j=0; j<tempAnak1.size(); j++){
+//                if(parent2.getKota(i).getAngka()!=tempAnak1.get(j).getAngka()){
+//                    Childsatu.add(parent2.getKota(i));
+//                }
+//            }
+//        }
+//        Collections.shuffle(tempAnak1);
+//        for(int i=0; i<tempAnak1.size(); i++){
+//            Childsatu.add(tempAnak1.get(i));
+//        }
+//      
         RuteMethod rm = new RuteMethod(Childsatu,this.map); 
         rm.hitungJarakTotal();
         Rute satu = new Rute(Childsatu,rm.getJarak());
-        return satu;
+        return copyParent1;
     }
     
     public void mutation(Rute satu , Rute dua){

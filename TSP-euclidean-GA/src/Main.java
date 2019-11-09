@@ -58,10 +58,13 @@ public class Main {
         geneticAlgorithm ga = new geneticAlgorithm(jarakTiapKota);
         KumpulanRute newPopulasi = new KumpulanRute(populationSize);
         Rute solutionRute = ga.makeNewGeneration(populasi);
+        
         ArrayList<Kota> kotaSolution = solutionRute.getRute();
+        System.out.println(solutionRute.getJumlahKota());
+       
         System.out.println("Maka Rute paling optimal : ");
-        for(Kota K : kotaSolution){
-            System.out.println(K.angka);
+        for(int i=1; i<solutionRute.getJumlahKota(); i++){
+            System.out.println(solutionRute.getKota(i).getAngka());
         }
         System.out.println("Fitness value : ");
         System.out.printf("%.5f",solutionRute.getFitness());

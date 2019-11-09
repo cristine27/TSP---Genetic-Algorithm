@@ -54,7 +54,7 @@ public class Rute {
     
     public void setKota(int index,Kota newKota){
         if(index>0){
-            this.KumpulanKota.set(index+1, newKota);
+            this.KumpulanKota.set(index-1, newKota);
         }
     }
 }
