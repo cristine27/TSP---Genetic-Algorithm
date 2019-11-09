@@ -52,9 +52,9 @@ public class geneticAlgorithm {
             
             double FlagMutasi = 0.5;
             double randomNum = Math.random();
-            if(randomNum < FlagMutasi){
-                mutation(arr[0],arr[1]);
-            }
+//            if(randomNum < FlagMutasi){
+//                mutation(arr[0],arr[1]);
+//            }
             
             newKRute.tambahRute(generasiKe++, arr[0]);
             newKRute.tambahRute(generasiKe++, arr[1]);
@@ -120,10 +120,25 @@ public class geneticAlgorithm {
         int indexRandom1 = (int)temp1;
         int indexRandom2 = (int)temp2;
         
-        Kota kota1 = satu.getKota(indexRandom1);
-        Kota kota2 = dua.getKota(indexRandom2);
-        satu.setKota(indexRandom2, kota2);
-        dua.setKota(indexRandom2, kota1);
+        if(indexRandom1<=0){
+            nilaiRandom = Math.random();
+            temp1 = nilaiRandom * satu.getJumlahKota();
+            indexRandom1 =  (int)temp1;
+        }
+        if(indexRandom2<=0){
+            nilaiRandom = Math.random();
+            temp2 = nilaiRandom * dua.getJumlahKota();
+            indexRandom2 =  (int)temp2;
+        }
+        
+        Kota satuIndex1 = satu.getKota(indexRandom1);
+        Kota satuIndex2 = satu.getKota(indexRandom2);
+        Kota duaIndex1 = dua.getKota(indexRandom1);
+        Kota duaIndex2 = dua.getKota(indexRandom2);
+        satu.setKota(indexRandom1, satuIndex2);
+        satu.setKota(indexRandom2, satuIndex1);
+        dua.setKota(indexRandom1, duaIndex2);
+        dua.setKota(indexRandom2, duaIndex1);
     }
     
     public int getGenerasi(){

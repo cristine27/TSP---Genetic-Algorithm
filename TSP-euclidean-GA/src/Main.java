@@ -37,7 +37,6 @@ public class Main {
                     double dist = Math.sqrt((X*X)+(Y*Y));
                     jarakTiapKota[kumpulanKota.get(i).getAngka()][kumpulanKota.get(j).getAngka()]=dist;
                     jarakTiapKota[kumpulanKota.get(j).getAngka()][kumpulanKota.get(i).getAngka()]=dist;
-                    System.out.println(dist + " " + kumpulanKota.get(i).getAngka());
                 }
             }
         }
@@ -55,7 +54,6 @@ public class Main {
         }
         populasi.setTotalFitnessFunction(totalFitness);
         populasi.hitungPeluang();
-//        populasi.printAllSolution();
         
         geneticAlgorithm ga = new geneticAlgorithm(jarakTiapKota);
         KumpulanRute newPopulasi = new KumpulanRute(populationSize);
