@@ -55,11 +55,20 @@ public class Main {
         }
         populasi.setTotalFitnessFunction(totalFitness);
         populasi.hitungPeluang();
-        populasi.printAllSolution();
+//        populasi.printAllSolution();
         
         geneticAlgorithm ga = new geneticAlgorithm(jarakTiapKota);
         KumpulanRute newPopulasi = new KumpulanRute(populationSize);
-        newPopulasi = ga.makeNewGeneration(populasi);
-        
+        Rute solutionRute = ga.makeNewGeneration(populasi);
+        ArrayList<Kota> kotaSolution = solutionRute.getRute();
+        System.out.println("Maka Rute paling optimal : ");
+        for(Kota K : kotaSolution){
+            System.out.println(K.angka);
+        }
+        System.out.println("Fitness value : ");
+        System.out.printf("%.5f",solutionRute.getFitness());
+        System.out.println("");
+        System.out.println("Merupakan generasi ke : ");
+        System.out.println(ga.getGenerasi());
     }
 }

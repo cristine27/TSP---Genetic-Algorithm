@@ -51,4 +51,10 @@ public class Rute {
     public void setPeluang(double peluang) {
         this.peluang = peluang;
     }
+    
+    public void setKota(int index,Kota newKota){
+        if(index>0){
+            this.KumpulanKota.set(index+1, newKota);
+        }
+    }
 }

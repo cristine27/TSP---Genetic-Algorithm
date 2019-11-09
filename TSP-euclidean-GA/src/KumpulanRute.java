@@ -43,23 +43,23 @@ public class KumpulanRute {
         }   
     }
     
-    public void printAllSolution(){
-        for(int i=0; i<this.populasi.length; i++){
-            if(this.populasi[i]!=null){
-                System.out.print("Solution "+ i + ": ");
-                for (int j = 1; j < populasi[i].getJumlahKota(); j++) {
-                    System.out.print(this.populasi[i].getRute().get(j-1).getAngka()+" ");   
-                }
-                System.out.println("");
-                System.out.print("Peluang :"+this.range[i][0]);
-                System.out.println("");
-                System.out.print("Cumulative :"+this.range[i][1]);
-                System.out.println("");
-                System.out.print("Fitness :"+this.populasi[i].getFitness());
-                System.out.println("");
-            }
-        }
-    }
+//    public void printAllSolution(){
+//        for(int i=0; i<this.populasi.length; i++){
+//            if(this.populasi[i]!=null){
+//                System.out.print("Solution "+ i + ": ");
+//                for (int j = 1; j < populasi[i].getJumlahKota(); j++) {
+//                    System.out.print(this.populasi[i].getRute().get(j-1).getAngka()+" ");   
+//                }
+//                System.out.println("");
+//                System.out.print("Peluang :"+this.range[i][0]);
+//                System.out.println("");
+//                System.out.print("Cumulative :"+this.range[i][1]);
+//                System.out.println("");
+//                System.out.print("Fitness :"+this.populasi[i].getFitness());
+//                System.out.println("");
+//            }
+//        }
+//    }
 
     public void setTotalFitnessFunction(double totalFitnessFunction) {
         this.totalFitnessFunction = totalFitnessFunction;

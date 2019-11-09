@@ -18,7 +18,8 @@ public class geneticAlgorithm {
     public Rute Childdua;
     public Rute savedRute;
     public double [][] map;
-    public static final boolean elitism = true;
+    public int fitnessFlag = 0;
+    public int generasi = 0;
     
     public geneticAlgorithm(double [][] map){
         this.map = map;
@@ -37,39 +38,65 @@ public class geneticAlgorithm {
         return rute.ambilRute(titikAmbil);
     }
     
-    public void saveRute(){
-        if(elitism){
-            //untuk menyimpan rute terbaik yang telah di temukan saat ini
-        }
-    }
-    
-    public KumpulanRute makeNewGeneration(KumpulanRute rute){
-        int jumlahGenerasi = 10;
-        KumpulanRute newKRute = new KumpulanRute(rute.getPopulasiSize());
+    public Rute makeNewGeneration(KumpulanRute rute){
+        int jumlahGenerasi = 50;
+        KumpulanRute newKRute = new KumpulanRute(jumlahGenerasi);
         int generasiKe = 1;
         for(int i=0; i<jumlahGenerasi; i++){
             Rute parent1 = selection(rute);
             Rute parent2 = selection(rute);
             
-            Rute [] arr = crossOver(parent1,parent2);
+            Rute [] arr = new Rute[2];
+            arr[0] = crossOver(parent1, parent2);
+            arr[1] = crossOver(parent2, parent1);
+            
+            double FlagMutasi = 0.5;
+            double randomNum = Math.random();
+            if(randomNum < FlagMutasi){
+                mutation(arr[0],arr[1]);
+            }
+            
             newKRute.tambahRute(generasiKe++, arr[0]);
             newKRute.tambahRute(generasiKe++, arr[1]);
+            
+//          diasumsikan child pertama mempunyai fitnes yang paling bagus.
+            savedRute = arr[0];
+            if(savedRute.getFitness()<arr[0].getFitness()){
+                savedRute = arr[0];
+                this.generasi = generasiKe;
+            }
+            if(savedRute.getFitness()<arr[1].getFitness()){
+                savedRute = arr[1];
+                this.generasi = generasiKe;
+            }
+            
+            if(savedRute.getFitness()==arr[0].getFitness() || savedRute.getFitness()==arr[0].getFitness()){
+                fitnessFlag++;
+                this.generasi = generasiKe;
+            }
+            if(fitnessFlag>5){
+                break;
+            }
         }
-        return newKRute;
+        return savedRute;
     }
     
-    public Rute[] crossOver(Rute parent1, Rute parent2){
+    public Rute crossOver(Rute parent1, Rute parent2){
         ArrayList<Kota> Childsatu = new ArrayList<>();
         ArrayList<Kota> Childdua = new ArrayList<>();
+        
         double nilaiRandom = Math.random();
         double temp = nilaiRandom * parent1.getJumlahKota();
         int random = (int)temp;
+        
         ArrayList<Kota> tempAnak1 = new ArrayList<>();
         for(int i=random; i<parent1.getJumlahKota(); i++){
-            tempAnak1.add(parent1.getKota(i));
+            if(i!=0 && i!=parent1.getJumlahKota()){
+                tempAnak1.add(parent1.getKota(i));
+            }
         }
-        for(int i=0; i<parent2.getJumlahKota(); i++){
-            for(int j=0; j<tempAnak1.size()-1; j++){
+        for(int i=1; i<=parent2.getJumlahKota(); i++){
+            for(int j=0; j<tempAnak1.size(); j++){
                 if(parent2.getKota(i)!=tempAnak1.get(j)){
                     Childsatu.add(parent2.getKota(i));
                 }
@@ -80,54 +107,26 @@ public class geneticAlgorithm {
             Childsatu.add(tempAnak1.get(i));
         }
         
-        nilaiRandom = Math.random();
-        temp = nilaiRandom * parent2.getJumlahKota();
-        random = (int) temp;
-        ArrayList<Kota> tempAnak2 = new ArrayList<>();
-        for(int i=random; i<parent2.getJumlahKota(); i++){
-            tempAnak2.add(parent2.getKota(i));
-        }
-        for(int i=0; i<parent1.getJumlahKota(); i++){
-            for(int j=0; j<tempAnak2.size()-1; j++){
-                if(parent1.getKota(i)!=tempAnak2.get(j)){
-                    Childdua.add(parent1.getKota(i));
-                }
-            }
-        }
-        Collections.shuffle(tempAnak1);
-        for(int i=0; i<tempAnak2.size(); i++){
-            Childdua.add(tempAnak2.get(i));
-        }
-        
         RuteMethod rm = new RuteMethod(Childsatu,this.map); 
         rm.hitungJarakTotal();
         Rute satu = new Rute(Childsatu,rm.getJarak());
-        rm = new RuteMethod(Childdua, this.map);
-        rm.hitungJarakTotal();
-        Rute dua = new Rute(Childdua,rm.getJarak());
-        Rute [] arr = new Rute[2];
-        arr[0] = satu;
-        arr[1] = dua;
-        return arr;
+        return satu;
     }
     
-    public void mutation(){
-//        double nilaiRandom = Math.random();
-//        double temp1 = nilaiRandom * this.Childsatu.size();
-//        double temp2 = nilaiRandom * this.Childdua.size();
-//        int indexRandom1 = (int)temp1;
-//        int indexRandom2 = (int)temp2;
-//        
-//        Kota kota1 = this.Childsatu.get(indexRandom1);
-//        Kota kota2 = this.Childsatu.get(indexRandom2);
-//        this.Childsatu.set(indexRandom1, kota2);
-//        this.Childsatu.set(indexRandom2, kota1);
-//        
-//        Kota kota3 = this.Childdua.get(indexRandom1);
-//        Kota kota4 = this.Childdua.get(indexRandom2);
-//        this.Childdua.set(indexRandom1, kota4);
-//        this.Childdua.set(indexRandom2, kota3);
+    public void mutation(Rute satu , Rute dua){
+        double nilaiRandom = Math.random();
+        double temp1 = nilaiRandom * satu.getJumlahKota();
+        double temp2 = nilaiRandom * dua.getJumlahKota();
+        int indexRandom1 = (int)temp1;
+        int indexRandom2 = (int)temp2;
+        
+        Kota kota1 = satu.getKota(indexRandom1);
+        Kota kota2 = dua.getKota(indexRandom2);
+        satu.setKota(indexRandom2, kota2);
+        dua.setKota(indexRandom2, kota1);
     }
     
-    
+    public int getGenerasi(){
+        return this.generasi;
+    }
 }
