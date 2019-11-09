@@ -19,7 +19,6 @@ public class Rute {
     private int jumlahKota;
     private double jarakTotal;
     private double peluang;
-//    private double kumulatifPeluang;
     
     public Rute(ArrayList<Kota> KK,double jarak){
         this.KumpulanKota = KK;

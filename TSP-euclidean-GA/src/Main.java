@@ -60,12 +60,14 @@ public class Main {
         Rute solutionRute = ga.makeNewGeneration(populasi);
         
         ArrayList<Kota> kotaSolution = solutionRute.getRute();
+        System.out.println("Jumlah Kota : ");
         System.out.println(solutionRute.getJumlahKota());
        
         System.out.println("Maka Rute paling optimal : ");
         for(int i=1; i<solutionRute.getJumlahKota(); i++){
-            System.out.println(solutionRute.getKota(i).getAngka());
+            System.out.print(solutionRute.getKota(i).getAngka()+" ");
         }
+        System.out.println("");
         System.out.println("Fitness value : ");
         System.out.printf("%.5f",solutionRute.getFitness());
         System.out.println("");
