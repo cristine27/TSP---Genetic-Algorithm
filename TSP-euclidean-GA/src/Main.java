@@ -56,12 +56,7 @@ public class Main {
         populasi.hitungPeluang();
         
         geneticAlgorithm ga = new geneticAlgorithm(jarakTiapKota);
-        KumpulanRute newPopulasi = new KumpulanRute(populationSize);
         Rute solutionRute = ga.makeNewGeneration(populasi);
-        
-        ArrayList<Kota> kotaSolution = solutionRute.getRute();
-        System.out.println("Jumlah Kota : ");
-        System.out.println(solutionRute.getJumlahKota());
        
         System.out.println("Maka Rute paling optimal : ");
         for(int i=1; i<solutionRute.getJumlahKota(); i++){
