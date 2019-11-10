@@ -63,8 +63,11 @@ public class Main {
             System.out.print(solutionRute.getKota(i).getAngka()+" ");
         }
         System.out.println("");
+        System.out.println("Distance : ");
+        System.out.println(solutionRute.getJarakTotal());
+        System.out.println("");
         System.out.println("Fitness value : ");
-        System.out.printf("%.5f",solutionRute.getFitness());
+        System.out.println(solutionRute.getFitness());
         System.out.println("");
         System.out.println("Merupakan generasi ke : ");
         System.out.println(ga.getGenerasi());

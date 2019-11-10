@@ -56,4 +56,8 @@ public class Rute {
             this.KumpulanKota.set(index-1, newKota);
         }
     }
+
+    public double getJarakTotal() {
+        return jarakTotal;
+    }
 }
