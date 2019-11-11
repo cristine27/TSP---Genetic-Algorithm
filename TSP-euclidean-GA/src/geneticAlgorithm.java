@@ -14,8 +14,6 @@ import java.util.Random;
  * @author user
  */
 public class geneticAlgorithm {
-    public Rute Childsatu;
-    public Rute Childdua;
     public Rute savedRute;
     public double [][] map;
     public int fitnessFlag = 0;
